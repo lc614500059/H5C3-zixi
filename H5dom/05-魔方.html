@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            position: relative;
+            margin: 100px auto;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg) rotateY(-30deg);
+            animation: go 4s linear infinite alternate;
+        }
+        @keyframes go{
+            from{
+                transform: rotateX(-30deg) rotateY(-30deg);
+            }
+            to{
+                transform: rotateX(180deg) rotateY(180deg);
+            }
+        }
+
+        .box>div {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+        }
+
+        .top {
+            /* background: red; */
+            transform: rotateX(90deg) translateZ(150px);
+        }
+
+        .bottom {
+            /* background: green; */
+            transform: rotateX(90deg) translateZ(-150px);
+        }
+
+        .left {
+            /* background: pink; */
+            transform: rotateY(90deg) translateZ(-150px);
+        }
+
+        .right {
+            /* background: blue; */
+            transform: rotateY(90deg) translateZ(150px);
+        }
+
+        .front {
+            /* background: yellow; */
+            transform: translateZ(150px);
+        }
+
+        .back {
+            /* background: purple; */
+            transform: translateZ(-150px);
+        }
+
+        li{
+            width: 100px;
+            height: 100px;
+            float: left;
+            position: relative;
+            top: 0;
+            left: 0;
+            border:1px solid #fff;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="top"></div>
+        <div class="bottom"></div>
+        <div class="left"></div>
+        <div class="right"></div>
+        <div class="front"></div>
+        <div class="back"></div>
+    </div>
+    <script src="jquery.js"></script>
+    <script>
+        $(function () {
+            var arr = ['pink',"deeppink","yellow","greenyellow","blue","red"];
+            $('.box>div').each(function(index, item) {
+                var ul = $("<ul></ul>");
+                for(var i = 0; i < 9; i++){
+                    var li = $("<li></li>");
+                    li.css("background",arr[index]);
+                    ul.append(li);
+                }
+                $(item).append(ul);
+            })
+
+            var load = [];
+            for (var i = 0; i < 54; i++) {
+                load.push(parseInt(Math.random()*380))
+            }
+            $("li").each(function(i,item){
+                $(item).css({"top":load[i],"left":load[i]})
+            })
+            $("li").each(function(i,item){
+                $(item).animate({"left":0,"top":0},3000)
+            })
+
+
+  
+        })
+    </script>
+</body>
+
+</html>
